@@ -3,15 +3,47 @@ $font-color1: black;
 $nav-color: #92C8FF;
 $nav-font-size: 1.50em;
 
- .accounts{
+.accounts{
   margin: 0 auto;
   display:inline-block;
- }
+}
+circle{
+  -webkit-transition-property: cy;
+  -webkit-transition-duration: .25s;
+  -webkit-transition-timing-function: ease;
+  /* Standard syntax */
+  transition-property: cy;
+  transition-duration: .25s;
+  transition-timing-function: ease;
+}
+circle:hover{
+  cy: 73;
+}
 
- .domain{
-  display:none;
- }
-
+.d3-tip{
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: black;
+  border-radius: 2px;
+}
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
 .balances{
   font-size: 10px;
   margin: 0 auto;
@@ -19,20 +51,17 @@ $nav-font-size: 1.50em;
 }
 
 path { 
-    stroke: steelblue;
+    stroke: black;
     stroke-width: 2;
     fill: none;
 }
 
-.axis path,
 .axis line {
     fill: none;
     stroke: grey;
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
-
-
 
 header{
   margin: 0;
@@ -42,6 +71,7 @@ header{
     margin: 0;
     height: 75px;
     .m{
+      margin: 0;
       color: black;
       text-align: center;
     }
@@ -71,7 +101,6 @@ body{
   margin: 0;
   background-color:$bg-color;
   font-family: 'Poiret One';
-
   .user-div{
     text-align: center;
     width: 100%;

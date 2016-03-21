@@ -64,11 +64,12 @@ y.domain([
     	.style("stroke", function(d) { return color(d.accountName); });
 
     // Add the scatterplot
-    // account.selectAll("circle")
-    //    	.append("circle")
-    //     .attr("r", 3.5)
-    //     .attr("cx", function(d) { return x(d.date); })
-    //     .attr("cy", function(d) { return y(d.balance); });
+    account.selectAll("circles")
+        .data(accounts)
+       	.enter().append("circle")
+        .attr("r", 3.5)
+        .attr("cx", function(d) { return x(d.date); })
+        .attr("cy", function(d) { return y(d.balance); });
 
     // Add the X Axis
     svg.append("g")

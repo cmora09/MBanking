@@ -16,8 +16,7 @@ var cColumn = "accountType";
 var xScale = d3.scale.ordinal().rangePoints([0, innerWidth]);
 var rScale = d3.scale.sqrt().range([0,rMax]);
 
-//x axis
-var xAxis = d3.svg.axis().scale(xScale).orient("bottom").outerTickSize(0);
+
 
 function draw(data){
 	//set domains/data space
@@ -25,47 +24,42 @@ function draw(data){
 	rScale.domain([0, d3.max(data, function (d){ return d[rColumn]; })]);
 	color.domain(data.map(function (d){ return d[cColumn]; }));
 	
+	var tip = d3.tip()
+		.offset([-10, 0])
+		.attr('class', 'd3-tip')
+		.html(function(d) {return "<strong><span style='color:#94FF6E'>Balance:</strong></span> <span style='color:white'>" + d.balance  + " USD" + "</span>";
+ 		});
 	// creates svg element in .accounts and adds a g element so circles are in view.
 	var svg = d3.select(".accounts")
 		.attr("width", outerWidth)
 		.attr("height", outerHeight)
-		    .append("g")
-        		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+		.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    //tooltip generated
+	
+	svg.call(tip);
     //enter phase where data is bound to each circle and added to the var svg and adds svg circles.
 	var circle = svg.selectAll("circle").data(data);
 	circle.enter().append("circle")
 		.attr("r",  function(d){ return rScale(d[rColumn]); })
 		.attr("cx", function(d){ return xScale(d[xColumn]); })
 		.attr("cy", innerHeight/2)
+		.on("mouseover",tip.show)
+		.on("mouseout", tip.hide)
 		.style("fill", function(d){ return color(d[cColumn]); })
 		.style("stroke","black")
 		.style("stroke-width","2px");
 
+    //follows same logic of circles. binds data to text and creates svg text elements
 	var text = svg.selectAll("text").data(data);
 	text.enter().append("text")
-		.attr("dx", function(d){ return xScale(d[xColumn])-20; })
+		.attr("dx", function(d){ return xScale(d[xColumn])-24; })
 		.attr("dy", innerHeight/2)
 		.text(function(d) {return (d[xColumn]); })
 		.style("stroke", "white");
 
-	circle.on("mouseover", function(){
-		d3.select(this)
-			.transition()
-			.ease("elastic")
-			.duration("2000")
-			.attr("cy", 40);
-	});
-	circle.on("mouseout",function(){
-		d3.select(this)
-			.transition()
-			.ease("elastic")
-			.duration("2000")
-			.attr("cy", 80);
-	})
-	
 	circle.exit().remove();
-	text.exit().remove;
+	text.exit().remove();
 }
 
 function parse(d){
