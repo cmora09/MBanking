@@ -57,18 +57,11 @@ var account = svg.selectAll(".blines")
     account.data(accounts)
     .enter().append("g")
     .attr("class","blines")
-    .append("path")
+
+var aLines = svg.selectAll(".blines").append("path")
         .attr("class", "line")
 	    .attr("d", function(d) { return zeeLine(d.values); })
     	.style("stroke", function(d) { return color(d.accountName); });
-
-    // Add the scatterplot
-    // account.selectAll("circles")
-    //     .data(accounts)
-    //    	.enter().append("circle")
-    //     .attr("r", 3.5)
-    //     .attr("cx", function(d) { return x(d.date); })
-    //     .attr("cy", function(d) { return y(d.balance); });
 
     // Add the X Axis
     svg.append("g")
@@ -80,6 +73,34 @@ var account = svg.selectAll(".blines")
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis);
+
+//analyzes total length of each line
+var totalLength = [aLines[0][0].getTotalLength(), aLines[0][1].getTotalLength(),aLines[0][2].getTotalLength()];
+
+//generate lines for each account
+d3.select(aLines[0][0])
+    .attr("stroke-dasharray", totalLength[0] + " " + totalLength[0] ) 
+    .attr("stroke-dashoffset", totalLength[0])
+    .transition()
+    .duration(2200)
+    .ease("linear")
+    .attr("stroke-dashoffset", 0);
+
+d3.select(aLines[0][1])
+    .attr("stroke-dasharray", totalLength[1] + " " + totalLength[1] )
+    .attr("stroke-dashoffset", totalLength[1])
+    .transition()
+    .duration(2200)
+    .ease("linear")
+    .attr("stroke-dashoffset", 0);
+
+d3.select(aLines[0][2])
+    .attr("stroke-dasharray", totalLength[1] + " " + totalLength[1] )
+    .attr("stroke-dashoffset", totalLength[1])
+    .transition()
+    .duration(2200)
+    .ease("linear")
+    .attr("stroke-dashoffset", 0);
 
 });
 
