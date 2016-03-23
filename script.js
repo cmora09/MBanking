@@ -29,7 +29,6 @@ var svg = d3.select(".balances")
     .append("g")
         .attr("transform", 
               "translate(" + margin.left + "," + margin.top + ")");
-
 // Get the data
 d3.csv("data.csv", function(error, data) {
 	if (error) throw error;
@@ -54,22 +53,22 @@ y.domain([
     d3.max(accounts, function(a) { return d3.max(a.values, function(v) {return v.balance;}); })
 ]);
     // Add the valueline path.
-    account = svg.selectAll("accounts")
+var account = svg.selectAll(".blines")
     account.data(accounts)
     .enter().append("g")
-    .attr("class","account")
+    .attr("class","blines")
     .append("path")
         .attr("class", "line")
 	    .attr("d", function(d) { return zeeLine(d.values); })
     	.style("stroke", function(d) { return color(d.accountName); });
 
     // Add the scatterplot
-    account.selectAll("circles")
-        .data(accounts)
-       	.enter().append("circle")
-        .attr("r", 3.5)
-        .attr("cx", function(d) { return x(d.date); })
-        .attr("cy", function(d) { return y(d.balance); });
+    // account.selectAll("circles")
+    //     .data(accounts)
+    //    	.enter().append("circle")
+    //     .attr("r", 3.5)
+    //     .attr("cx", function(d) { return x(d.date); })
+    //     .attr("cy", function(d) { return y(d.balance); });
 
     // Add the X Axis
     svg.append("g")

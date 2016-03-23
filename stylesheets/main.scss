@@ -69,7 +69,7 @@ header{
     background-color: $nav-color;
     color:black;
     margin: 0;
-    height: 75px;
+    height: 50px;
     .m{
       margin: 0;
       color: black;
@@ -82,21 +82,10 @@ header{
         margin: 0;
         display: inline-block;
         padding-left: 1em;
-        a{
-          margin: 0;
-          color: $font-color1;
-          text-decoration: none;
-          font-size: 1.5em; 
-          &:hover{
-            font-weight: bold;
-            color: #E1D4E4;
-          }
-        }
-      }
+       }
     }
   }
 }
-
 body{
   margin: 0;
   background-color:$bg-color;
@@ -116,6 +105,19 @@ body{
     }
   }
 }
-  h3{
-    margin: 0;
+h3{
+  margin: 0 auto;
+  display:inline-block;
+      font-weight:bold;
+   a{
+    padding-right: 20px;
+    color:#1F77B4;
+    text-decoration: none;
+    &:hover{
+      color:#FF7F0E;
+      border-bottom:solid 2px #FF7F0E;
+      width:50%;
+    }
   }
+}
+

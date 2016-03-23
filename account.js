@@ -53,9 +53,10 @@ function draw(data){
     //follows same logic of circles. binds data to text and creates svg text elements
 	var text = svg.selectAll("text").data(data);
 	text.enter().append("text")
-		.attr("dx", function(d){ return xScale(d[xColumn])-24; })
+		.attr("dx", function(d){ return xScale(d[xColumn]); })
 		.attr("dy", innerHeight/2)
 		.text(function(d) {return (d[xColumn]); })
+		.style("text-anchor","middle")
 		.style("stroke", "white");
 
 	circle.exit().remove();
@@ -67,5 +68,5 @@ function parse(d){
 	return d;
 }
 
-d3.csv("account.csv", parse, draw);
+d3.csv("account.csv",parse, draw);
 
