@@ -80,7 +80,9 @@ d3.csv("expenditure.csv", type, function(error, data) {
     donut.append("text")
     .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
     	.attr("dy", ".35em")
-    	.text(function(d) { return d.data.percentage + "%"; });
+    	.text(function(d) { return d.data.percentage + "%"; })
+    	.style("stroke","white");
+
 
     donut.append("text")
     	.attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
